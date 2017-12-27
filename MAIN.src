@@ -1,0 +1,63 @@
+#library "ENHSCR" //ENCHSCR
+#include "zcommon.acs"
+//#include "acs/PLUTONIA.o" //TODO:
+// Map enhancement script (c) PROPHESSOR 2017
+
+bool DEBUG = true;
+
+function int sceiling(int x, int y){
+	return GetSectorCeilingZ(0, x, y);
+}
+
+function int sfloor(int x, int y){
+	return GetSectorFloorZ(0, x, y);
+}
+
+function int spawnfloor(str class, int x, int y){
+	if(DEBUG) print(s:"Spawned ",s:class, s:"at ",f:x, s:" ", f:y, s:" ", f:sfloor(x, y));
+	return Spawn(class, x, y, sfloor(x, y));
+}
+function int spawnceiling(str class, int x, int y){
+	if(DEBUG) print(s:"Spawned ",s:class, s:"at ",f:x, s:" ", f:y, s:" ", f:sfloor(x, y));
+	return Spawn(class, x, y, sceiling(x, y));
+}
+
+
+Script "ENHSCR_Map_Detector" OPEN {
+	print(s:"Enhancement script by PROPHESSOR started!");
+	DamageThing (10);
+	ACS_NamedExecute("ENHSCR_Plutonia_Map02", 2);
+}
+
+Script "ENHSCR_Test" (void) {
+	int x = GetActorX(0);
+	int y = GetActorY(0);
+	int z = GetActorZ(0);
+	print(s:"Player: ", f:x, s:":",f:y,s:":",f:z,s:"\n Ceiling x floor:",f:sceiling(x, y), s:" x ", f:sfloor(x, y));
+}
+
+Script "ENHSCR_Tester" (void) {
+	ACS_NamedExecute("ENHSCR_Test", 0);
+	delay(12);
+	restart;
+}
+
+//#library "PLUTONIA"
+
+// PLUTONIA
+
+Script "ENHSCR_Plutonia_Map02" (void) {
+	print(s:"Spawned rain");
+	SpawnFloor("LargeRainSpawner", -1264., -378.);
+	
+	//SpawnFloor("LargeRainSpawner", -160., 160.);
+	SpawnFloor("LargeRainSpawner", 32., 224.);
+	SpawnFloor("LargeRainSpawner", 288., -32.);
+	SpawnFloor("LargeRainSpawner", 32., -288.);
+	SpawnFloor("LargeRainSpawner", -224., -32.);
+	
+	Spawn("BDVines1", -1280., -672., 144.);
+	Spawn("BDECcagedlight2", -704., 256., 55.);
+	Spawn("BDECcagedlight2", -1120., 2544., 144.);
+	//SpawnFloor("ZombieMan", -160., 160.);
+}

@@ -1,0 +1,19 @@
+#library "PLUTONIA"
+
+// PLUTONIA
+
+Script "ENHSCR_Plutonia_Map02" (void) {
+	print(s:"Spawned rain");
+	SpawnFloor("LargeRainSpawner", -1264., -378.);
+	
+	//SpawnFloor("LargeRainSpawner", -160., 160.);
+	SpawnFloor("LargeRainSpawner", 32., 224.);
+	SpawnFloor("LargeRainSpawner", 288., -32.);
+	SpawnFloor("LargeRainSpawner", 32., -288.);
+	SpawnFloor("LargeRainSpawner", -224., -32.);
+	
+	Spawn("BDVines1", -1280., -672., 144.);
+	Spawn("BDECcagedlight2", -704., 256., 55.);
+	Spawn("BDECcagedlight2", -1120., 2544., 144.);
+	//SpawnFloor("ZombieMan", -160., 160.);
+}
